@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script type="text/javascript" src="SecurityManager.js"></script>
+    <script type="text/javascript" src="My.js"></script>
+    <script type="text/javascript" src="UserLogin.js"></script>
+    <link type="text/css" href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="fullbox">
+        <h1>Security Manager</h1>
+        <div class="flex">
+        <!--Admin Login-->
+        <div class="loginport">
+            <form action="AdminHome.html" onsubmit="return validateAdminForm()">
+            <h2>Login Admin</h2>
+            <div class="inputform">
+                <label id="userlabel" for="username">Username:</label><br>
+                <input type="text" id="username" >
+                <br/><br>
+                <label id="passwordlabel" for="password">Password:</label><br>
+                <input type="password" id="password">
+            </div>
+            <input type="submit" value="Login" class="loginbtn">
+            </form>
+        </div>
+        <!--User Login-->
+        <div class="loginport">
+            <form action="UserHome.html" onsubmit="return validateUserForm()">
+            <h2>Login User</h2>
+            
+                <div class="inputform">
+                    <label id="userlabel" for="userlogin">Username:</label><br>
+                    <input type="text" id="userlogin" >
+                    <br/><br>
+                    <label id="passwordlabel" for="userpassword">Password:</label><br>
+                    <input type="password" id="userpassword">
+                </div>
+                
+                <input type="submit" value="Login" class="loginbtn">
+                <br>
+            </form>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
