@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="SecurityManager.js"></script>
+    <script type="text/javascript" src="My.js"></script>
+    <script type="text/javascript" src="RoleManagement.js"></script>
+    <script type="text/javascript" src="PermissionManagement.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="return loadingPermissionTable()">
+          <!--Navigation Bar-->
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link " href="AdminHome.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="UserManagement.html">User Management</a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="RoleManagement.html">Role Management</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Permission Management</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Role-PermissionManagement.html">Role-Permission Management</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="User-RoleManagement.html">User-Role Management</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="Login.html">Logout</a>
+                  </li>
+                </ul>
+                
+              </div>
+            </div>
+          </nav>
+        <!--/Navigation Bar-->
+<div id="permissionmsg">
+
+</div>
+        <div class="flex">
+            <div class="loginport margin">
+                <h2 class="padder">Permission Management</h2>
+                <form action="PermissionManagement.html" onsubmit="return savePermission()" >
+                <div class="inputform"> 
+                <label id="permissionlabel" for="permissionname">Permission Name:</label><br>
+                <input type="text" id="permissionname"><br><br>
+                
+                <label id="desclabel" for="permissiondesc">Description:</label><br>
+                <input type="text" id="permissiondesc"><br><br>
+              </div>
+                <input type="submit" value="Save" class="loginbtn rightalign">
+                
+            </form>
+            </div>
+
+            <div>
+                <table class="tablecenter">
+
+                </table>
+            </div>
+        </div>
+
+</body>
+</html>
