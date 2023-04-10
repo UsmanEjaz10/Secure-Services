@@ -7,8 +7,15 @@ function validateUserForm(){
     // Username + password recieved.
     console.log(userlogin + " " + userpassword);
 
-    if(userlogin == "") return false;
-    if(userpassword == "") return false;
+    let error = 0;
+    
+    if(userlogin == "") error = "Please enter username";
+   else if(userpassword == "") error = "Please enter password";
+
+    if(error !=0){
+        alertmsg(error, "uloginmsg");
+        return false;
+    }
 
     console.log("both fields not empty");
     let users = SecurityManager.GetAllUsers();
@@ -22,6 +29,8 @@ function validateUserForm(){
             return true;
         }
     }
+    error = "Invalid username or password";
+    alertmsg(error, "uloginmsg");
     return false;
 }
 

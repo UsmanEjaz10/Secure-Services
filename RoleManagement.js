@@ -6,6 +6,16 @@ function saveRole(){
     let desc = gid("desc");
     console.log(rolename.value + " " + desc.value);
 
+    let error=0;
+
+    if(rolename.value =="") error = "Please enter Role name.";
+    else if(desc.value =="") error = "Please enter description.";
+
+    if(error !=0){
+        alertmsg(error, "rolemsg");
+        return false;
+    }
+
     let roles = SecurityManager.GetAllRoles();
     console.log(roles);
     

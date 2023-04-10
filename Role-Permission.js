@@ -40,6 +40,16 @@ function roleDrop(id){
 function saveRP(){
     let permissionDropDown = gid("permissionDropDown");
     let roleDropDown = gid("roleDropDown");
+
+    let error=0;
+    if(roleDropDown.value == undefined) error = "Please enter role";
+    else if(permissionDropDown.value == undefined) error = "Please enter permission";
+
+    if(error!=0){
+        alertmsg(error, "RPmsg");
+        return false;
+    }
+
     console.log(permissionDropDown.value + "--per----role-- " + roleDropDown.value);
     let role = SecurityManager.GetRoleById(roleDropDown.value);
     let permission = SecurityManager.GetPermissionById(permissionDropDown.value);

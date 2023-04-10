@@ -4,6 +4,15 @@ function savePermission(){
     let pname = gid("permissionname");
     let pdesc = gid("permissiondesc");
     console.log(pname.value + " " + pdesc.value);
+    
+    let error = 0;
+    if(pname.value =="") error = "Please enter Permission name";
+    else if(pdesc.value =="") error = "Please enter description";
+    if(error!=0){
+        alertmsg(error, "permissionmsg");
+        return false;
+    }
+
     let id;
     if(permissionsave == 0){
         id = null;

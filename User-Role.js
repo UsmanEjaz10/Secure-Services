@@ -21,6 +21,16 @@ function userDrop(id){
 function saveUR(){
     let userDropDown = gid("userDropDown");
     let roleDropDown = gid("roleDropDown");
+
+    let error = 0;
+    if(roleDropDown.value == undefined) error = "Please enter a specific role";
+    else if(userDropDown.value == undefined) error = "Please enter a specific user for the role";
+
+    if(error!=0){
+        alertmsg(error, "URmsg");
+        return false;
+    }
+
     console.log(userDropDown.value + "--per----role-- " + roleDropDown.value);
     let role = SecurityManager.GetRoleById(roleDropDown.value);
     let user = SecurityManager.GetUserById(userDropDown.value);
