@@ -16,9 +16,24 @@ function validateAdminForm(){
     // Username + password recieved.
     console.log(username + " " + password);
 
-    if(username == "") return false;
-    if(password == "") return false;
-    return SecurityManager.ValidateAdmin(username, password);
+    let error =0;
+    if(username == "") error = "Please enter username";
+   else if(password == "") error = "Please enter password";
+    
+   if(error !=0){
+    alertmsg(error, "uloginmsg");
+    return false;
+   }
+   
+   let a = SecurityManager.ValidateAdmin(username, password);
+   console.log("Value recieved after validation" + a);
+   
+   if(a == false){
+    error = "Invalid username or password for admin login";
+    alertmsg(error, "uloginmsg");
+    return false;
+   }
+   return true;
 }
 
     var country;
@@ -74,8 +89,8 @@ function Save_user(){
     let countryDropdown = gid("countryDropdown").value;
     let cityDropDown = gid("cityDropDown").value;
 
-    console.log(countryDropdown);
-    console.log(cityDropDown);
+    console.log("country: "+countryDropdown);
+    console.log("city: "+cityDropDown);
 
     let error =  0;
      if(login == "") error = " Please enter login";
@@ -87,7 +102,7 @@ function Save_user(){
 
 
     if(error != 0){
-        alertmsg( error);
+        alertmsg(error, "usermsg");
         return false;
     }
 
@@ -97,11 +112,12 @@ function Save_user(){
         console.log("New user entered");
      id = null;
      let users = SecurityManager.GetAllUsers();
+     console.log("users: "+users);
      for(let i = 0; i<users.length; i++){
-         if(users[i].Login == login.value || users[i].Email == email.value){
+         if(users[i].Login == login || users[i].Email == email){
              console.log("Not unique login or email");
              error = "Not unique Login or email!!";
-             alertmsg(error);
+             alertmsg(error, "usermsg");
              return false;
          }
      }
@@ -114,8 +130,6 @@ function Save_user(){
    
     let user = {ID: id ,Name: name, Email: email, Country: countryDropdown, City: cityDropDown, Login: login, Password: password };
     console.log(error);
-    
-
     
     return SecurityManager.SaveUser(user, successUserSave, errorUserSave );
    
