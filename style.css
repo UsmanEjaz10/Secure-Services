@@ -1,0 +1,106 @@
+table, th, tr, td{
+    border: double;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+  }
+  table{
+    margin: 10px;
+  }
+
+  .hola{
+    background-color:#d6d6d6;
+    text-align:center;
+     border: 3px solid;
+     border-radius: 30px;
+      width: 50%;
+       margin:10px;
+       margin-left: auto;
+       margin-right: auto;
+     padding:10px;
+  }
+
+  .WelcomeUser{
+    text-align:center; border: 5px solid; width: 50%; margin:auto; padding:10px; color:white; background: black;
+  }
+
+  .fullbox{
+    text-align: center;
+    border: 2px solid;
+    margin:auto;
+    background-color: lightgray;
+    width:50%;
+    margin-top: 50px;
+    padding: 10px;
+    padding-bottom: 60px;
+  }
+
+  .flex{
+    display: flex;
+    justify-content: center;
+  }
+
+  .loginport{
+    text-align: center;
+    border: 2px solid;
+    background-color:#555555;
+    color:azure;
+    padding: 2px;
+    
+    margin:5px;
+  }
+
+  .inputform{
+    text-align: left;
+    color:black;
+    background-color:ghostwhite;
+    padding: 25px;
+  }
+
+  .loginbtn{
+    margin:10px;
+    width: 30%;
+    margin-left: 100px;
+  }
+
+  .centerhead{
+    margin:20px;
+    text-align: center;
+    transition: font-size 10s;
+  }
+
+  .centerhead:hover{
+    transform: scale(1.5);
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    }
+
+    .padder{
+      padding: 20px;
+    }
+
+    .rightalign{
+      margin-left: 180px;
+    }
+
+    .tablecenter{
+      justify-content: center;
+      margin: 20px;
+      margin-top: 15%;
+    }
+
+    .margin{
+      margin-top: 30px;
+    }
+
+    .wide{
+      width:30%;
+    }
+
+    .absolutebtn{
+      position: absolute;
+      margin-left: 85px;
+      margin-top: 9px;
+      width: 7%;
+
+    }
