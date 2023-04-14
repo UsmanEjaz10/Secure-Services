@@ -60,8 +60,8 @@ function saveRP(){
         if(rp[i].Role == role.Name ){
             console.log("comparing first " + rp[i].Role + " " + role.Name)
             if(rp[i].Permission == permission.Name){
-                console.log("comparing second " + rp[i].Permission + " " + permission.Name)
             console.log("Same role permission already added!!");
+            alertmsg("Same Role-Permission already added", "RPmsg");
             return false;
             }
         }
@@ -163,4 +163,13 @@ function loadingRPTable(){
         alertmsg(msg, "RPmsg");
         sessionStorage.removeItem('delRP');
     }
+}
+
+
+function resetRolePermission(){
+ 
+    let role = gid("Rolebox");
+    let permission = gid("Permissionbox");
+    role.innerHTML = "Select:";
+    permission.innerHTML = "Select:";
 }

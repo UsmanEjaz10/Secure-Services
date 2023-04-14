@@ -39,11 +39,10 @@ function saveUR(){
     console.log(rp.length);
     for(let i = 0; i<rp.length; i++){
         if(rp[i].Role == role.Name ){
-            console.log("comparing first " + rp[i].Role + " " + role.Name)
             if(rp[i].User == user.Login){
-                console.log("comparing second " + rp[i].User + " " + user.Name);
             console.log("Same role user already added!!");
-            window.location.reload();
+            alertmsg("Same User-Role already added", "URmsg");
+          //  window.location.reload();
             return false;
             }
         }
@@ -144,4 +143,11 @@ function loadingURTable(){
         alertmsg(msg, "URmsg");
         sessionStorage.removeItem('delUR');
     }
+}
+
+function resetUserRole(){
+    let user = gid("userbox");
+    let role = gid("Rolebox");
+    user.innerHTML = "Select:";
+    role.innerHTML = "Select:";
 }

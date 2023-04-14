@@ -1,12 +1,5 @@
+// useSave is a global variable that saves the id of a user which is to be edited //
 var userSave = 0;
-
-function resetCountryCity(){
-    let countrybox = gid("countrybox");
-    let citybox = gid("citybox");
-    countrybox.innerHTML = "Select:";
-    citybox.innerHTML = "Select:";
-}
-
 
 // Validating Admin Login Form
 function validateAdminForm(){
@@ -16,19 +9,21 @@ function validateAdminForm(){
     // Username + password recieved.
     console.log(username + " " + password);
 
-    let error =0;
+    let error =0;   
+
+    // Validation for empty fields //
     if(username == "") error = "Please enter username";
    else if(password == "") error = "Please enter password";
     
    if(error !=0){
-    alertmsg(error, "uloginmsg");
+    alertmsg(error, "uloginmsg");   // uloginmsg is the id of the div created on Login screen that displays error message //
     return false;
    }
    
    let a = SecurityManager.ValidateAdmin(username, password);
    console.log("Value recieved after validation" + a);
    
-   if(a == false){
+   if(a == false){  // Unsuccessful verification //
     error = "Invalid username or password for admin login";
     alertmsg(error, "uloginmsg");
     return false;
@@ -39,6 +34,8 @@ function validateAdminForm(){
     var country;
     var city;
 
+
+// Function is used to display the selected country by user. //
 function check(id){
     let countryDropdown = gid("countryDropdown");
     countryDropdown.value = id;
@@ -50,12 +47,13 @@ function check(id){
         if(c[x].CountryID == id){
             console.log("found id match" + c[x].CountryID);
             gid("countrybox").innerHTML=c[x].Name;
-            gid("citybox").innerHTML = "Select";
+            gid("citybox").innerHTML = "Select:";
         }
     }
     country = countryDropdown.value;
 }
 
+// This function sets the value of dropdown to the value of the city selected (by id) //
 function checkcity(id){
     let cityDropdown = gid("cityDropDown");
     cityDropdown.value = id;
@@ -69,6 +67,7 @@ function checkcity(id){
     }
 }
 
+// Displays the the available cities under the selected country //
 function Citycheck(){
         let cities = SecurityManager.GetCitiesByCountryId(country);
         console.log("country selected with id = " + country);
@@ -89,10 +88,12 @@ function Save_user(){
     let countryDropdown = gid("countryDropdown").value;
     let cityDropDown = gid("cityDropDown").value;
 
-    console.log("country: "+countryDropdown);
+    console.log("country: "+countryDropdown);   // Debugging....//
     console.log("city: "+cityDropDown);
 
     let error =  0;
+
+    // Empty fields validation.. //
      if(login == "") error = " Please enter login";
     else if(password == "") error = "Please enter password";
     else if(name == "") error = "Please enter name";
@@ -108,7 +109,7 @@ function Save_user(){
 
     let id;
    
-    if(userSave == 0){
+    if(userSave == 0){      // usersave global variable helps us identifying that whether the user is new or not. 
         console.log("New user entered");
      id = null;
      let users = SecurityManager.GetAllUsers();
@@ -117,13 +118,13 @@ function Save_user(){
          if(users[i].Login == login || users[i].Email == email){
              console.log("Not unique login or email");
              error = "Not unique Login or email!!";
-             alertmsg(error, "usermsg");
+             alertmsg(error, "usermsg");    // Displays an error message if the user is new but selecting a user login or email which is already entered //
              return false;
          }
      }
     }
     else{
-        console.log("Already entered user");
+        console.log("Already entered user");   // as userSave has a specific id of an object, it indicates that Edit function has been called //
         id = userSave;
         userSave = 0;
     }
@@ -136,6 +137,7 @@ function Save_user(){
     
 }
 
+// The most used function used to display alert messages on the occurence of different events //
 function alertmsg(errormsg, id){
     const msg = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>`+ errormsg + `</strong>. 
@@ -146,6 +148,8 @@ function alertmsg(errormsg, id){
     content.innerHTML = msg;
 }
 
+
+// Success function displays successful message if user has been saved //
 function successUserSave(obj){
     let msg = "User has been saved with id: " + obj.ID + " and login: " + obj.Login;
     console.log(msg);
@@ -153,6 +157,7 @@ function successUserSave(obj){
     return true;
 }
 
+// Success function called if the user has been deleted successfully //
 function successdeleteUser(id){
 
     let msg = "User has been deleted with id: " + id;
@@ -162,9 +167,13 @@ function successdeleteUser(id){
     
 }
 
+// Called at loading time, displays grid and any success message to be displayed //
+function loadingUserTable(){    
+    
+    Tablegenerator();   // Used to generate a grid that displays already added users. //
+    
 
-function loadingUserTable(){
-    Tablegenerator();
+    // Used sessionStorage to store success messages because after a successful event we have called .reload() function. So to success message to be displayed we need to store it in the session and remove it as it is displayed //
     if(sessionStorage.getItem('savesuccess')){
         let msg = sessionStorage.getItem('savesuccess');
         alertmsg(msg, "usermsg");
@@ -177,13 +186,14 @@ function loadingUserTable(){
     }
 }
 
-
+// Error messages displayed on unsuccessful deletion //
 function errordeleteUser(stringmsg){
     let msg = "User cannot be deleted due to: "+ stringmsg;
     alertmsg(msg, "usermsg");
     return false;
 }
 
+// Error messages displayed on unsuccessful user save //
 function errorUserSave(stringmsg){
     console.log("Cannot save the user because of: "  + stringmsg);
     let msg = "User cannot " + stringmsg + " the user.";
@@ -196,6 +206,8 @@ function Tablegenerator(){
     let table = document.querySelector("table");
     let users = SecurityManager.GetAllUsers();
     let properties = ["ID","Name", "Email", "Edit", "Delete"];
+
+    // Creating the table header with the names mentioned in properties[] //
     let thead = table.createTHead();
     let r = thead.insertRow();
     for(let i = 0; i<properties.length; i++){
@@ -204,6 +216,8 @@ function Tablegenerator(){
         th.appendChild(text);
         r.appendChild(th);
     }
+
+    // Adding each row one by one //
     for(let i = 0; i<users.length; i++){
         let row = table.insertRow();
         let idcell = row.insertCell();
@@ -221,7 +235,7 @@ function Tablegenerator(){
         x.appendChild(edit);
         x.setAttribute('id' , users[i].ID);
         x.onclick = function(){
-            editUser(users[i]);
+            editUser(users[i]); // For every click edit function (below) is called //
         }
         console.log(x);  
       let del = document.createTextNode("Delete");
@@ -229,8 +243,8 @@ function Tablegenerator(){
         y.onclick= function(){
             var msg = confirm("Do you really want to delete" + users[i].Name);
             if(msg){
-            SecurityManager.DeleteUser(users[i].ID, successdeleteUser, errordeleteUser);
-            window.location.reload();
+            SecurityManager.DeleteUser(users[i].ID, successdeleteUser, errordeleteUser); // Deletion function //
+            window.location.reload(); // As you can see .reload() function is used to update the grid, sessionStorage comes in handy //
             }
         }
         y.appendChild(del);
@@ -239,7 +253,6 @@ function Tablegenerator(){
         namecell.appendChild(name);
         emailcell.appendChild(email);
         editcell.appendChild(x);
-      //  editcell.onclick = editUser(users[i]);
       
         delcell.appendChild(y);
     }
@@ -247,7 +260,7 @@ function Tablegenerator(){
 }
 
 
-
+// The function gets called when the user clicks on Edit button //
 function editUser(users){
     let login = gid("login");
     let password = gid("password");
@@ -288,11 +301,18 @@ function editUser(users){
     }
 
 
-    userSave = users.ID;
+    userSave = users.ID;    // here userSave gets the id of object which will help us identifying that this is not a new user //
     let user = {ID: id ,Name: name.value, Email: email.value, Country: countryDropdown.value, City: cityDropDown.value, Login: login.value, Password: password.value };
     console.log(user);
 }
 
+// Simple function that resets the value of country and city //
+function resetCountryCity(){
+    let countrybox = gid("countrybox");
+    let citybox = gid("citybox");
+    countrybox.innerHTML = "Select:";
+    citybox.innerHTML = "Select:";
+}
 
 
 

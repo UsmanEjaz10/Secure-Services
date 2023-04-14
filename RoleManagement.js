@@ -1,4 +1,4 @@
-var roleSave = 0;
+var roleSave = 0; // Helps identifying edit function //
 
 function saveRole(){
 
@@ -26,6 +26,7 @@ function saveRole(){
         for(let i = 0; i<roles.length; i++){
             if(roles[i].Name == rolename.value){
                 console.log("Role name already exists");
+                alertmsg("Role name already exists", "rolemsg");      // Same Role name already exists in the table //
                 return false;
             }
         }
@@ -42,10 +43,18 @@ function saveRole(){
     
 }
 
+// Resuable function designed in such a way that all other grid displays can use it. //
+// table -> table to be created //
+// object -> For which object table is to be created (Role, Permission, Role-Permission, User-Role) //
+// properties -> Table headers //
+// editfunction -> indicates that edit function should be called //
+// funcType -> name of the function to be called when delete button is clicked //
+// delsuccess -> not used specifically in this function but passed onto another function (identifier) //
+// delerror -> not used specifically in this function but passed onto another function (identifier) //
 
 function createTable(table, object, properties, editfunction, funcType, delsuccess, delerror){
 
-    TableHeader(table, properties);
+    TableHeader(table, properties);     // another resuable function helps us create table headers(table and properties[]) // 
     for(let i =0; i<object.length; i++){
         let row = table.insertRow();
         for(let j in object[i]){
@@ -79,6 +88,10 @@ function createTable(table, object, properties, editfunction, funcType, delsucce
 }
 }
 
+
+// Identifier function allows us to identify which function is to be called //
+// Recives type -> as a parameter that identifies which further actions are to be taken //
+// delsuccess -> here recieved in parameter signals which deletionsuccess message to be called as different success messages are displayed for different objects. Same is the case with delerror //
 function identifier(obj, type, delsuccess, delerror){
     if(type == "deleteRole"){
         console.log(delsuccess);
@@ -109,17 +122,22 @@ function identifier(obj, type, delsuccess, delerror){
 
 }
 
+// Role table gives the properties and all ohter required parameter to let other functions like createtable, tableheader know that object = Role //
 function RoleTable(){
     let table = document.querySelector("table");
     let roles = SecurityManager.GetAllRoles();
 
     let properties = ["ID" , "Name", "Description", "Edit", "Delete"];
-    let func = "deleteRole";
-    let e_func = "editRole";
+    
+    // used in identifier function to know the type of function to be called //
+    let func = "deleteRole";    
+    let e_func = "editRole";    
+
     console.log(roles);
     console.log(properties);
     createTable(table, roles, properties, e_func, func, successdeleteRole, errordeleteRole);
 }
+
 
 function EditRole(role){
     let rolename = gid("rolename");
@@ -132,6 +150,7 @@ function EditRole(role){
 
 }
 
+// Table header used above creates table headings(of name given in properties[]) for the table(recieved in parameter)
 function TableHeader(table, properties){
     let thead = table.createTHead();
     let row = thead.insertRow();
@@ -174,6 +193,8 @@ function errorRoleSave(stringmsg){
     return false;
 }
 
+
+// Similar functionality as of UserTable loading //
 function loadingRoleTable(){
     RoleTable();
     if(sessionStorage.getItem('saverole')){

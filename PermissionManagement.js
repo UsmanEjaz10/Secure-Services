@@ -1,3 +1,4 @@
+// Same as usersave, permissionSave helps us identifying the edit function //
 var permissionsave = 0;
 
 function savePermission(){
@@ -13,13 +14,15 @@ function savePermission(){
         return false;
     }
 
+    let permissions = SecurityManager.GetAllPermissions();
+    console.log(permissions)
     let id;
     if(permissionsave == 0){
         id = null;
-        let permissions = SecurityManager.GetAllPermissions();
         for(let i =0; i<permissions.length; i++){
-            if(permissions.Name == pname.value){
+            if(permissions[i].Name == pname.value){
                 console.log("permission name already exists");
+                alertmsg("Permission name already exists.", "permissionmsg"); // Displays error if permission name already exists in the grid //
                 return false;
             }
         }
@@ -101,3 +104,4 @@ function EditPermission(permission){
   //  let r = {ID: id , Name: rolename.value, DESC: desc.value};
 
 }
+
