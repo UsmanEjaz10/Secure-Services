@@ -59,7 +59,7 @@ table, th, tr, td{
 
   .loginbtn{
     margin:10px;
-    width: 30%;
+    width: 100px;
     margin-left: 100px;
   }
 
@@ -83,6 +83,10 @@ table, th, tr, td{
       margin-left: 180px;
     }
 
+    .rightalign2{
+      margin-left: 200px;
+    }
+
     .tablecenter{
       justify-content: center;
       margin: 20px;
@@ -95,6 +99,10 @@ table, th, tr, td{
 
     .wide{
       width:30%;
+    }
+
+    .wider{
+      width:40%;
     }
 
     .absolutebtn{
