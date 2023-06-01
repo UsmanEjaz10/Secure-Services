@@ -23,18 +23,18 @@ function saveRole(){
     let id;
     if(roleSave == 0){
         id = null;
-        for(let i = 0; i<roles.length; i++){
-            if(roles[i].Name == rolename.value){
-                console.log("Role name already exists");
-                alertmsg("Role name already exists", "rolemsg");      // Same Role name already exists in the table //
-                return false;
-            }
-        }
-    
     }
     else{
         id = roleSave;
         roleSave = 0;
+    }
+
+    for(let i = 0; i<roles.length; i++){
+        if(roles[i].Name == rolename.value){
+            console.log("Role name already exists");
+            alertmsg("Role name already exists", "rolemsg");      // Same Role name already exists in the table //
+            return false;
+        }
     }
 
     let role = {ID: id, Name: rolename.value, DESC: desc.value};

@@ -19,17 +19,18 @@ function savePermission(){
     let id;
     if(permissionsave == 0){
         id = null;
-        for(let i =0; i<permissions.length; i++){
-            if(permissions[i].Name == pname.value){
-                console.log("permission name already exists");
-                alertmsg("Permission name already exists.", "permissionmsg"); // Displays error if permission name already exists in the grid //
-                return false;
-            }
-        }
     }
     else{
         id = permissionsave;
         permissionsave = 0;
+    }
+
+    for(let i =0; i<permissions.length; i++){
+        if(permissions[i].Name == pname.value){
+            console.log("permission name already exists");
+            alertmsg("Permission name already exists.", "permissionmsg"); // Displays error if permission name already exists in the grid //
+            return false;
+        }
     }
 
     let permission = {ID: id, Name: pname.value, DESC: pdesc.value};

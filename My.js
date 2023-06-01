@@ -87,11 +87,13 @@ function Save_user(){
     let email = gid("email").value;
     let countryDropdown = gid("countryDropdown").value;
     let cityDropDown = gid("cityDropDown").value;
-
+    let val  = gid("email");
     console.log("country: "+countryDropdown);   // Debugging....//
     console.log("city: "+cityDropDown);
 
     let error =  0;
+    
+    console.log(val.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/));   
 
     // Empty fields validation.. //
      if(login == "") error = " Please enter login";
@@ -100,6 +102,8 @@ function Save_user(){
     else if(email == "") error = "Please enter email";
     else if(countryDropdown == undefined) error = "Please enter Country";
     else if(cityDropDown == undefined) error = "Please enter a City";
+    else if(!val.value.match(/^[A-Za-z\._\-0-9]*[@][A-Za-z]*[\.][a-z]{2,4}$/)){error = "Please enter valid email address";}
+    
 
 
     if(error != 0){
